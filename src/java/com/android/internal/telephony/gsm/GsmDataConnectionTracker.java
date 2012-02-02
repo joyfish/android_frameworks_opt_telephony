@@ -1387,6 +1387,7 @@ public final class GsmDataConnectionTracker extends DataConnectionTracker {
                 log("onDataStateChanged: Data Activity updated to DORMANT. stopNetStatePoll");
             }
             stopNetStatPoll();
+            stopDataStallAlarm();
         } else {
             mActivity = DctConstants.Activity.NONE;
             if (DBG) {
@@ -1394,7 +1395,10 @@ public final class GsmDataConnectionTracker extends DataConnectionTracker {
                          "isAnyDataCallActive = " + isAnyDataCallActive +
                          " isAnyDataCallDormant = " + isAnyDataCallDormant);
             }
-            if (isAnyDataCallActive) startNetStatPoll();
+            if (isAnyDataCallActive) {
+                startNetStatPoll();
+                startDataStallAlarm(DATA_STALL_NOT_SUSPECTED);
+            }
         }
         mPhone.notifyDataActivity();
 
