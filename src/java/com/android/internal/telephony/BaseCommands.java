@@ -667,4 +667,12 @@ public abstract class BaseCommands implements CommandsInterface {
 
     @Override
     public void testingEmergencyCall() {}
+
+    /**
+     * @hide
+     */
+    @Override
+    public int getLteOnGsmMode() {
+        return TelephonyManager.getLteOnGsmModeStatic();
+    }
 }
