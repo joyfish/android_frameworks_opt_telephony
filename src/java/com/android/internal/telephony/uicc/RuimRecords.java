@@ -454,7 +454,12 @@ public final class RuimRecords extends IccRecords {
                 }
 
                 log("IMSI: " + mImsi.substring(0, 6) + "xxxxxxxxx");
+				String CdmaFactory = SystemProperties.get("ro.cdma.factory");
+				String ChinaGON = SystemProperties.get("gsm.operator.numeric");
 
+				if ("china".equals(CdmaFactory) || "46003".equals(ChinaGON) ) {
+					mImsi = SystemProperties.get("gsm.operator.numeric");
+				}
                 String operatorNumeric = getRUIMOperatorNumeric();
                 if (operatorNumeric != null) {
                     if(operatorNumeric.length() <= 6){
